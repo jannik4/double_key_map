@@ -1,0 +1,15 @@
+[package]
+name = "double_key_map"
+description = "double_key_map - wip"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jannik Obermann <jannik.obermann@gmail.com>"]
+repository = "https://github.com/jannik4/double_key_map"
+license = "MIT OR Apache-2.0"
+
+[features]
+default = []
+serde = ["dep:serde"]
+
+[dependencies]
+serde = { version = "1.0.188", optional = true }
