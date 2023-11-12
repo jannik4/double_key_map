@@ -153,6 +153,20 @@ impl<K1, K2, V> DoubleKeyMap<K1, K2, V> {
         Some((&**k1, &**k2, v))
     }
 
+    pub fn contains_key1(&self, key: &K1) -> bool
+    where
+        K1: Hash + Eq,
+    {
+        self.map1.contains_key(key)
+    }
+
+    pub fn contains_key2(&self, key: &K2) -> bool
+    where
+        K2: Hash + Eq,
+    {
+        self.map2.contains_key(key)
+    }
+
     pub fn iter(&self) -> impl Iterator<Item = (&K1, &K2, &V)> {
         self.into_iter()
     }
@@ -205,6 +219,20 @@ where
         assert!(data.len() == map1.len() && data.len() == map2.len());
 
         Self { data, map1, map2 }
+    }
+}
+
+impl<K1, K2, V> FromIterator<(K1, K2, V)> for DoubleKeyMap<K1, K2, V>
+where
+    K1: Hash + Eq,
+    K2: Hash + Eq,
+{
+    fn from_iter<T: IntoIterator<Item = (K1, K2, V)>>(iter: T) -> Self {
+        let mut map = Self::new();
+        for (k1, k2, v) in iter {
+            map.insert(k1, k2, v);
+        }
+        map
     }
 }
 
