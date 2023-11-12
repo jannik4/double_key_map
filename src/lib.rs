@@ -160,6 +160,22 @@ impl<K1, K2, V> DoubleKeyMap<K1, K2, V> {
     pub fn iter_mut(&mut self) -> impl Iterator<Item = (&K1, &K2, &mut V)> {
         self.into_iter()
     }
+
+    pub fn keys1(&self) -> impl Iterator<Item = &K1> {
+        self.map1.keys().map(|k| &**k)
+    }
+
+    pub fn keys2(&self) -> impl Iterator<Item = &K2> {
+        self.map2.keys().map(|k| &**k)
+    }
+
+    pub fn values(&self) -> impl Iterator<Item = &V> {
+        self.data.iter().map(|(_, _, v)| v)
+    }
+
+    pub fn values_mut(&mut self) -> impl Iterator<Item = &mut V> {
+        self.data.iter_mut().map(|(_, _, v)| v)
+    }
 }
 
 impl<K1, K2, V> Default for DoubleKeyMap<K1, K2, V> {
