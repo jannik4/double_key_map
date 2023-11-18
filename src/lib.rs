@@ -67,7 +67,7 @@ impl<K1, K2, V> DoubleKeyMap<K1, K2, V> {
 
             let map2_idx = self.map2.get_mut(k2).unwrap();
             // This assert is critical to protect against UB if the keys Eq/Hash impls are broken.
-            assert_eq!(*map1_idx, self.data.len());
+            assert_eq!(*map2_idx, self.data.len());
             *map2_idx = idx;
         }
 
